@@ -51,7 +51,7 @@ def dlfiles(directory, url_list):
         dlfile(directory, url)
         
 def main():
-    directory = "http://openconnecto.me/data/public/MR/m2g_v1_1_2/SWU4/sg/JHU/"
+    directory = "http://openconnecto.me/data/public/MR/m2g_v1_1_2/SWU4/sg/desikan/"
     urls = link_crawler(directory)
     urls.remove(urls[0])
     dlfiles(directory, urls)
