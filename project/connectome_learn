@@ -1,0 +1,91 @@
+function [classified,vote_test_class,vote_misses,vote_hit] = Connectome_Learn(train_data, train_class, test_data, test_class)
+% This function runs a series of binary classification algorithms. It
+% returns a struct, explained below:
+
+% (1) Run Linear Classifier. Note: pseduoLinear algo is on.
+
+linear_model = fitcdiscr(train_data,train_class,'discrimType','pseudoLinear');
+linear_test_class = predict(linear_model,test_data);
+
+linear_misses = sum(abs(linear_test_class' - test_class));
+linear_hit = 1 - (linear_misses/length(linear_test_class'));
+
+% (2) Run Tree Classifier. Note: this is an ensemble of trees.
+
+tree_model = TreeBagger(5,train_data,train_class,'OOBVarImp','On');
+tree_test_class = predict(tree_model,test_data);
+
+tree_test_class = str2num(cell2mat(tree_test_class));
+
+tree_misses = sum(abs(tree_test_class' - test_class));
+tree_hit = 1 - (tree_misses/length(tree_test_class'));
+
+% (3) Run SVM Classifier. Note: kernel is assumed to be linear by default.
+
+svm_model = fitcsvm(train_data,train_class);
+svm_test_class = predict(svm_model,test_data);
+
+svm_misses = sum(abs(svm_test_class' - test_class));
+svm_hit = 1 - (svm_misses/length(svm_test_class'));
+
+% (4) Run Naive Bayes Classifier. Note: strong independence between 
+%     features is assumed.
+
+ens_model = fitensemble(train_data,train_class,'AdaBoostM1',10, 'Discriminant');
+ens_test_class = predict(ens_model,test_data);
+
+ens_misses = sum(abs(ens_test_class' - test_class));
+ens_hit = 1 - (ens_misses/length(ens_test_class'));
+
+% (5) Run K nearest neighbor classifier. Note: need to specify K.
+
+knn_model = fitcknn(train_data,train_class,'NumNeighbors',sqrt(length(train_data)));
+knn_test_class = predict(knn_model,test_data);
+
+knn_misses = sum(abs(knn_test_class' - test_class));
+knn_hit = 1 - (knn_misses/length(knn_test_class'));
+
+% (6) All algorithms vote. Majority rules.
+
+vote_test_class = [];
+
+for i = 1:length(test_class)
+
+    count = 0;
+    
+    if linear_test_class(i) == 1
+        count = count + 1;
+    end
+    
+    if tree_test_class(i) == 1
+        count = count + 1;
+    end
+    
+    if svm_test_class(i) == 1
+        count = count + 1;
+    end
+    
+    if ens_test_class(i) == 1
+        count = count + 1;
+    end
+    
+    if knn_test_class(i) == 1
+        count = count + 1;
+    end
+    
+    %take a vote   
+    if count >= 3
+        vote_test_class(i) = 1;
+    else
+        vote_test_class = 2;
+        
+    end
+ 
+end
+
+vote_misses = sum(abs(vote_test_class - test_class));
+vote_hit = 1 - (vote_misses/length(vote_test_class));
+
+classified = [linear_hit,tree_hit,svm_hit,ens_hit,knn_hit,vote_hit];
+
+end
