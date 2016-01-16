@@ -1,1 +1,98 @@
-https://www.overleaf.com/4037830kmxrgp
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage{cite}
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+
+
+\title{Creating Classifiers for the Identification of Subject Covariates in Brain Graph Data}
+\author{Addison Wright, Chris Micek, Monica Rodriguez}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+\begin{document}
+\maketitle
+\section{Introduction}
+
+An abundance of brain graph data exist that have yet to be analyzed, specifically the southwest China data set. Unfortunately, the data is corrupted by errors in the form of misidentified edges or synapses, which will prove to be a challenge in our analysis. Our team proposes to train an array of classifiers to identify certain binary criteria, evaluating the strength of each one along the way. After the classifiers have been created, our team would also like to gain insight into the topological data features deemed the most important for the identification of graphs. In addition to the classification above, our team will also explore the potential benefits of performing elementary optmization analyses on graphs, hoping to use them as features of the data to see if they provide any further insight.
+
+\section{Project Outline}
+\subsection{A Detailed List}
+
+The tasks below compose our plan of attack for this project. They are subject to change and addendum if our team deems it necessary.
+\begin{enumerate}
+\item Get the Southwest China data set
+\item Understand and parse the data
+\item Choose a programming language - MATLAB
+\item Choose an atlas to use as a proof of concept. This will require the consultation of Will, Greg and Alex.
+\item Merge files. This will require seperate code that likely will not be written in MATLAB. The goal of this task is to create files that will be easier to upload into MATLAB.
+\item Identify particular binary classes, for the purposes of classification
+\item Explore different classifiers, comparing their efficacy
+\item Explore different graph statistics
+\item Explore classifiers again using the aforementioned graph statistics as added information
+\item Concurrent: Explore the important graph features and their relationship with Nueroscience; explore methods outlined in the paper, "Graph Classification using Signal-Subgraphs: Applications in Statistical Connectomics," written by Joshua T. Vogelstein, William R. Gray, R. Jacob Vogelstein, and Carey E. Priebe 
+\item Create Poster/ one-sheeter for presentation to the class
+\end{enumerate}
+
+\subsection{Schedule}
+\textbf{Thurs. Jan. 14} - Have preliminary classifier code that works\\
+\textbf{Mon. Jan. 18} - Refine and debug classifier code, record and discuss results\\
+\textbf{Thurs. Jan 21} - Have completed poster
+
+\subsection{Allocation of Tasks}
+\textbf{Chris} - Try to combine .graphml files for easier loading, help code classifier\\
+\textbf{Addison} - Read up on signal subgraphs and Josh Vogelstein's work, help code classifier\\
+\textbf{Monica} - Help code classifier, research underlying neuronal mechanisms for results
+
+\bibliography{yourbibname}{}
+\bibliographystyle{plain}
+
+\end{document}
+
+
+
+
+
+
+
