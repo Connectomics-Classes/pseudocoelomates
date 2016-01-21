@@ -2,8 +2,8 @@
 %for classifer m, and Names, a cell array of strings labeling each
 %classifier m.
 
-%For ROC curve, takes Scores, an m x n matrix of classification scores for
-%each classifier, m, the corresponding m x n matrix of true class labels
+%For ROC curve, takes Scores, an n x m matrix of classification scores for
+%each classifier, m, the corresponding vector of true class labels
 %for class m, Labels, and the positive class label Posclass (a string).
 
 
@@ -17,7 +17,7 @@ ylabel('Error')
 sz = size(Scores);
 figure(2)
 for i = 1 : sz(1,1)
-    [X, Y] = perfcurve(Scores(i,:), Labels(i,:), Posclass);
+    [X, Y] = perfcurve(Scores(:,i), Labels, Posclass);
     plot(X, Y)
     hold on
 end
