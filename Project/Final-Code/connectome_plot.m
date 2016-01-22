@@ -14,7 +14,7 @@ bar(cval_cell{1});
 set(gca,'XTickLabel',Names)
 title('Classification Rate')
 xlabel('Classifier')
-ylabel('Error')
+ylabel('Classification Rate')
 sz = 6;
 figure(2)
 for i = 1 : 6
